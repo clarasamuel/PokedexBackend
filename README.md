@@ -29,6 +29,7 @@
 ## Installation
 
 ```bash
+$ curl https://get.volta.sh | bash #installation de Volta
 $ npm install
 ```
 

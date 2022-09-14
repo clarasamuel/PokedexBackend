@@ -69,5 +69,9 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
+  },
+  "volta": {
+    "node": "16.13.0",
+    "npm": "8.19.2"
   }
 }

@@ -11,8 +11,8 @@ export class PokemonsController {
         return this.pokemonsService.getPokemons(query.page);
     }
 
-    @Get(':pokemonID')
-    async getPokemon(@Param('pokemonID') pokemonID : number) {
-        return this.pokemonsService.getPokemon(pokemonID);
+    @Get(':pokemonName')
+    async getPokemon(@Param('pokemonName') pokemonName : string) {
+        return this.pokemonsService.getPokemon(pokemonName);
     }
 }
