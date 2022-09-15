@@ -1,12 +1,12 @@
-import {ApiPropertyOptional} from "@nestjs/swagger";
+import { ApiPropertyOptional } from '@nestjs/swagger';
 
 export class PokemonDto {
-    @ApiPropertyOptional({ type: Number })
-    readonly id: number;
+  @ApiPropertyOptional({ type: Number })
+  readonly id: number;
 
-    @ApiPropertyOptional({ type: String })
-    readonly name: string;
+  @ApiPropertyOptional({ type: String })
+  readonly name: string;
 
-    @ApiPropertyOptional({ type: String })
-    readonly picture: string;
+  @ApiPropertyOptional({ type: String })
+  readonly picture: string;
 }
