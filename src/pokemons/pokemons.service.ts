@@ -1,14 +1,13 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { HttpService } from '@nestjs/axios';
-import { NamedAPIResourceListDto } from './dto/named-API-resource-list.dto';
 import { map } from 'rxjs/operators';
-import { AxiosResponse } from 'axios';
 import { Observable } from 'rxjs';
+import { HttpService } from '@nestjs/axios';
+import { AxiosResponse } from 'axios';
+import { NamedAPIResourceListDto } from './dto/named-API-resource-list.dto';
 import { NamedAPIResourceDto } from './dto/named-API-resource.dto';
 import { PokemonDto } from './dto/pokemon.dto';
 
 const URL_API_POKEMON = 'https://pokeapi.co/api/v2/pokemon';
-const LIMIT = 20;
 
 @Injectable()
 export class PokemonsService {
@@ -19,22 +18,20 @@ export class PokemonsService {
   /**
    * Récupère des X (Limit) pokemon de la page (pageNumber)
    * @param pageNumber
+   * @param limit
    */
-  getPokemons(pageNumber = 0): Observable<NamedAPIResourceDto[]> {
+  getPokemons(limit, pageNumber = 0): Observable<NamedAPIResourceDto[]> {
     this.logger.log(
-      'Returning ' + LIMIT + ' pokemon from page : ' + pageNumber,
+      'Returning ' + limit + ' pokemons from page : ' + pageNumber,
     );
 
     const urlToCall =
-      URL_API_POKEMON + '?limit=' + LIMIT + '&offset=' + pageNumber * LIMIT;
-    return this.httpService
-      .get<NamedAPIResourceListDto>(urlToCall)
-      .pipe(
-        map(
-          (response: AxiosResponse<NamedAPIResourceListDto>) => response.data,
-        ),
-      )
-      .pipe(map((data: NamedAPIResourceListDto) => data.results));
+      URL_API_POKEMON + '?limit=' + limit + '&offset=' + pageNumber * limit;
+
+    return this.httpService.get<NamedAPIResourceListDto>(urlToCall).pipe(
+      map((response: AxiosResponse<NamedAPIResourceListDto>) => response.data),
+      map((data: NamedAPIResourceListDto) => data.results),
+    );
   }
 
   /**
