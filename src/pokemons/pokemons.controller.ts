@@ -4,8 +4,6 @@ import { QueryListDto } from './dto/query-list.dto';
 import { forkJoin, Observable, switchMap } from 'rxjs';
 import { PokemonDto } from './dto/pokemon.dto';
 
-const LIMIT = 20;
-
 @Controller('pokemons')
 export class PokemonsController {
   constructor(private pokemonsService: PokemonsService) {}
@@ -13,12 +11,12 @@ export class PokemonsController {
   @Get()
   getPokemons(@Query() query: QueryListDto) {
     const observablePokemons = this.pokemonsService.getPokemons(
-      LIMIT,
+      query.limit,
       query.page,
     );
 
     const tab = [];
-    for (let index = 0; index < LIMIT; index++) {
+    for (let index = 0; index < query.limit; index++) {
       tab.push(
         observablePokemons.pipe(
           switchMap((reponse) => {
