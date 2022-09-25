@@ -20,12 +20,15 @@ export class PokemonsService {
    * @param pageNumber
    * @param limit
    */
-  getPokemons(limit, pageNumber = 0): Observable<NamedAPIResourceDto[]> {
+  getPokemons(
+    limit: number,
+    pageNumber = 0,
+  ): Observable<NamedAPIResourceDto[]> {
     this.logger.log(
       'Returning ' + limit + ' pokemons from page : ' + pageNumber,
     );
 
-    const urlToCall =
+    const urlToCall: string =
       URL_API_POKEMON + '?limit=' + limit + '&offset=' + pageNumber * limit;
 
     return this.httpService.get<NamedAPIResourceListDto>(urlToCall).pipe(
@@ -41,7 +44,7 @@ export class PokemonsService {
   getPokemon(pokemonName: string): Observable<PokemonDto> {
     this.logger.log('Returning pokemon with name : ' + pokemonName);
 
-    const urlToCall = URL_API_POKEMON + '/' + pokemonName;
+    const urlToCall: string = URL_API_POKEMON + '/' + pokemonName;
     return this.httpService
       .get(urlToCall)
       .pipe(map((response) => response.data))
